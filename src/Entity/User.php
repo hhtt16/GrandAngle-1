@@ -216,7 +216,7 @@ class User implements UserInterface
 
     public function setPostalCode(string $postalCode): self
     {
-        $this->postalCode = $postalCode;
+        $this->postal_code = $postalCode;
 
         return $this;
     }
@@ -240,7 +240,7 @@ class User implements UserInterface
 
     public function setBirthDate(\DateTimeInterface $birthDate): self
     {
-        $this->birthDate = $birthDate;
+        $this->birth_date = $birthDate;
 
         return $this;
     }
@@ -264,7 +264,7 @@ class User implements UserInterface
 
     public function setHireDate(\DateTimeInterface $hireDate): self
     {
-        $this->hireDate = $hireDate;
+        $this->hire_date = $hireDate;
 
         return $this;
     }
