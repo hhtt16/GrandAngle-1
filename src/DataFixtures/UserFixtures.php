@@ -28,7 +28,6 @@ class UserFixtures extends Fixture
         $user->setLastname('Chaussadas');
         $user->setFirstname('Nicolas');
         $user->setEmail('nicolaschaussadas@outlook.fr');
-        $user->setRoles(['ROLE_USER']);
         $user->setPassword('$2y$10$fcnLeE7orWVNn/cqn3brT.XJPJWounxf4twzm/HvsDeDIwk1DwLsu');
         $user->setAddress('4 Avenue de Paris');
         $user->setPostalCode('45000');
