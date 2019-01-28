@@ -90,9 +90,21 @@ class User implements UserInterface
      */
     private $messages;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Exhibition", mappedBy="user")
+     */
+    private $exhibitions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Work", mappedBy="user")
+     */
+    private $works;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
+        $this->exhibitions = new ArrayCollection();
+        $this->works = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -318,6 +330,68 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($message->getUser() === $this) {
                 $message->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Exhibition[]
+     */
+    public function getExhibitions(): Collection
+    {
+        return $this->exhibitions;
+    }
+
+    public function addExhibition(Exhibition $exhibition): self
+    {
+        if (!$this->exhibitions->contains($exhibition)) {
+            $this->exhibitions[] = $exhibition;
+            $exhibition->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExhibition(Exhibition $exhibition): self
+    {
+        if ($this->exhibitions->contains($exhibition)) {
+            $this->exhibitions->removeElement($exhibition);
+            // set the owning side to null (unless already changed)
+            if ($exhibition->getUser() === $this) {
+                $exhibition->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Work[]
+     */
+    public function getWorks(): Collection
+    {
+        return $this->works;
+    }
+
+    public function addWork(Work $work): self
+    {
+        if (!$this->works->contains($work)) {
+            $this->works[] = $work;
+            $work->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWork(Work $work): self
+    {
+        if ($this->works->contains($work)) {
+            $this->works->removeElement($work);
+            // set the owning side to null (unless already changed)
+            if ($work->getUser() === $this) {
+                $work->setUser(null);
             }
         }
 
