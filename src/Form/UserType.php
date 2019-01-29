@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class UserType extends AbstractType
 {
@@ -14,7 +15,14 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
+            ->add('roles', ChoiceType::class,[
+                'multiple' => true,
+                'expanded' => true,
+                'choices' => [
+                    'Administrateur' => 'ROLE_ADMIN',
+                    'Collaborateur' => 'ROLE_USER'
+                    ]
+                ])
             ->add('password')
             ->add('lastname')
             ->add('firstname')
@@ -33,6 +41,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'translation_domain' => 'forms'
         ]);
     }
 }
