@@ -29,7 +29,7 @@ class Artist
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $email;
 
@@ -57,6 +57,12 @@ class Artist
      * @ORM\OneToMany(targetEntity="App\Entity\Work", mappedBy="artist")
      */
     private $work;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="artists")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function __construct()
     {
@@ -194,6 +200,18 @@ class Artist
                 $work->setArtist(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

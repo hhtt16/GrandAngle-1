@@ -39,14 +39,14 @@ class Work
     private $weight;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $delivery_date;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
-    private $end_date;
+    private $exit_date;
 
     /**
      * @ORM\Column(type="datetime")
@@ -154,12 +154,12 @@ class Work
 
     public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->end_date;
+        return $this->exit_date;
     }
 
-    public function setEndDate(\DateTimeInterface $end_date): self
+    public function setEndDate(\DateTimeInterface $exit_date): self
     {
-        $this->end_date = $end_date;
+        $this->exit_date = $exit_date;
 
         return $this;
     }
