@@ -55,6 +55,7 @@ hr{
 /*********************** HOME ***********************/
 
 .home_category {
+    max-height: 600px;
     color: #222832;
     transition: opacity .5s;
     opacity: 0.7;
