@@ -3,14 +3,12 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+    {% include "partials/_navbar.html.twig" %}
+    <div class="container">
+    <h1>{{ app.user.lastname }} {{ app.user.firstname }}</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
             <tr>
                 <th>Email</th>
                 <td>{{ user.email }}</td>
@@ -18,10 +16,6 @@
             <tr>
                 <th>Roles</th>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
             </tr>
             <tr>
                 <th>Lastname</th>
@@ -71,4 +65,5 @@
     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
 
     {{ include('user/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

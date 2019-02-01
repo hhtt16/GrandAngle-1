@@ -2,19 +2,16 @@
 
 namespace App\DataFixtures;
 
-use Faker\Factory;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-require dirname(__DIR__).'/vendor/fzaninotto/faker/src/autoload.php';
 
 class UserFixtures extends Fixture
 {
 
     public function load(ObjectManager $manager)
     {
-        $faker = Faker\Factory::create();
         
         $user = new User();
         $user->setLastname('Rabier');

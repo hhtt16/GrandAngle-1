@@ -6,7 +6,9 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class UserType extends AbstractType
@@ -14,6 +16,9 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('photo', FileType::class,[
+                'data_class' => null
+            ])
             ->add('email')
             ->add('roles', ChoiceType::class,[
                 'multiple' => true,
@@ -23,10 +28,9 @@ class UserType extends AbstractType
                     'Collaborateur' => 'ROLE_USER'
                     ]
                 ])
-            ->add('password')
+            ->add('password', HiddenType::class)
             ->add('lastname')
             ->add('firstname')
-            ->add('photo')
             ->add('address')
             ->add('postal_code')
             ->add('city')
