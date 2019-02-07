@@ -4,66 +4,49 @@
 
 {% block body %}
     {% include "partials/_navbar.html.twig" %}
-    <div class="container">
-    <h1>{{ app.user.lastname }} {{ app.user.firstname }}</h1>
+    <div class="container mt-5">
+    <div class="row justify-content-center">
+        <h1>{{ user.lastname }} {{ user.firstname }}</h1>
+        <p class="text-center">
+            <img class="img-fluid m-3" src="{{ asset("assets/medias/avatars/" ~ user.photo) }}" alt="avatar">
+        </p>
+    </div>
+        <div class="row mt-5">
+            <div class="col-md-3 offset-md-3">
+             <h5>Email</h5>
+            <p>{{ user.email }}</p>
+            <h5>Adresse</h5>
+            <p>{{ user.address }} <br>
+                {{ user.postalCode }} <br>
+                {{ user.city }}</p>
+            <h5>Date de naissance</h5>
+            <p>{{ user.birthDate ? user.birthDate|date('d-m-Y') : '' }}</p>
+            {% if user.phone %}
+                <h5>Téléphone</h5>
+                <p>{{ user.phone }}</p>
+            {% endif %}
+            
+            </div>
+            <div class="col-md-3">
+                <h5>Roles</h5>
+                <ul>
+                {% for role in user.roles %}
+                    {% if role == "ROLE_ADMIN" %}
+                        <li>Administrateur</li> 
+                        {% else %}
+                        <li>Collaborateur</li> 
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            <h5>Date d'embauche</h5>
+            <p>{{ user.hireDate ? user.hireDate|date('d-m-Y') : '' }}</p>
+            </div>
+        </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ user.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ user.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Photo</th>
-                <td>{{ user.photo }}</td>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <td>{{ user.address }}</td>
-            </tr>
-            <tr>
-                <th>Postal_code</th>
-                <td>{{ user.postalCode }}</td>
-            </tr>
-            <tr>
-                <th>City</th>
-                <td>{{ user.city }}</td>
-            </tr>
-            <tr>
-                <th>Birth_date</th>
-                <td>{{ user.birthDate ? user.birthDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Phone</th>
-                <td>{{ user.phone }}</td>
-            </tr>
-            <tr>
-                <th>Hire_date</th>
-                <td>{{ user.hireDate ? user.hireDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+           
+            <div class="text-center">
+                <a class="btn btn-outline-warning" href="{{ path('user_edit', {'id': user.id}) }}">Modifier</a>
+            </div>    
 
-    <a href="{{ path('user_index') }}">back to list</a>
-
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
     </div>
 {% endblock %}
