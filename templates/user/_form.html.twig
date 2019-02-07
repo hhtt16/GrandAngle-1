@@ -1,4 +1,121 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="row">
+    <div class="row col-md-6">
+        <div class="row align-items-center">
+            <img src="{{ asset("assets/medias/avatars/" ~ user.photo) }}" alt="avatar">
+                {{ form_widget(form.photo) }}
+            </div>
+            <div class="col-md-6">
+                <p>
+                    {{ form_label(form.lastname) }}
+                </p>
+                <p>
+                    {{ form_label(form.firstname) }}
+                </p>
+                <p>
+                    {{ form_label(form.email) }}
+                </p>
+                <p>
+                    {{ form_label(form.phone) }}
+                </p>
+                <p>
+                    {{ form_label(form.password) }}
+                </p>
+                <p>
+                    {{ form_label(form.birth_date) }}
+                </p>
+            </div>
+            <div class="col-md-6">
+                <p>
+                    {{ form_widget(form.lastname) }}
+                </p>
+                <p>
+                    {{ form_widget(form.firstname) }}
+                </p>
+                <p>
+                    {{ form_widget(form.email) }}
+                </p>
+                <p>
+                    {{ form_widget(form.phone) }}
+                </p>
+                <p>
+                    {{ form_widget(form.password) }}
+                </p>
+                <p>
+                    {{ form_widget(form.birth_date) }}
+                </p>
+            </div>
+        </div>
+        <div class="row col-md-6 align-items-center">
+            <div class="col-md-6">
+            {% if is_granted("ROLE_ADMIN") %}
+            
+                <p>
+                    {{ form_label(form.roles) }}
+                </p>
+                <p>
+                    {{ form_label(form.hire_date) }}
+                </p>
+            
+            {% else %}
+
+                <p><h5>ROLES</h5></p>
+                <p><h5>Date d'embauche</h5></p>
+                  
+            {% endif %}
+            
+                <p>
+                    {{ form_label(form.address) }}
+                </p>
+                <p>
+                    {{ form_label(form.postal_code) }}
+                </p>
+                <p>
+                    {{ form_label(form.city) }}
+                </p>
+            </div>
+            <div class="col-md-6">
+            {% if is_granted("ROLE_ADMIN") %}
+                <p>
+                    {{ form_widget(form.roles) }}
+                </p>
+                <p>
+                    {{ form_widget(form.hire_date) }}
+                </p>
+
+            {% else %}
+                <p>
+                    {% for role in user.roles %}
+                        <ul>
+                            {% if role == "ROLE_ADMIN" %}
+                                <li>Administrateur</li>
+                            {% else %}
+                                <li>Collaborateur</li>
+                        </ul>
+                            
+                        {% endif %}
+                        
+                    {% endfor %}
+                </p>
+                
+            {% endif %}
+                <p>
+                    {{ user.hire_date }}
+                </p>
+                <p>
+                    {{ form_widget(form.address) }}
+                </p>
+                <p>
+                    {{ form_widget(form.postal_code) }}
+                </p>
+                <p>
+                    {{ form_widget(form.city) }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-outline-warning">{{ button_label|default('Créer') }}</button>
+    </div>
+    {{ form_end(form) }}
+    

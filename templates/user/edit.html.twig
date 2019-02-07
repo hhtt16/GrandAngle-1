@@ -1,18 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Modifier{% endblock %}
 
 {% block body %}
 
 {% include "partials/_navbar.html.twig" %}
 
-<div class="container">
-    <h1>Edit User</h1>
+<div class="container mt-5">
 
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('user/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('user_index') }}">back to list</a>
+    <a class="btn btn-secondary" href="{{ path('user_index') }}">back to list</a>
 
-    {{ include('user/_delete_form.html.twig') }}
+    
 </div>
 {% endblock %}

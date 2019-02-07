@@ -24,11 +24,10 @@ class UserType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'choices' => [
-                    'Administrateur' => 'ROLE_ADMIN',
-                    'Collaborateur' => 'ROLE_USER'
+                    'Administrateur' => 'ROLE_ADMIN'
                     ]
                 ])
-            ->add('password', HiddenType::class)
+            ->add('password')
             ->add('lastname')
             ->add('firstname')
             ->add('address')
@@ -37,7 +36,6 @@ class UserType extends AbstractType
             ->add('birth_date')
             ->add('phone')
             ->add('hire_date')
-            ->add('created_at')
         ;
     }
 
