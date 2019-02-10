@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Service\FileUploader;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,12 +65,26 @@ class UserController extends AbstractController
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, User $user, FileUploader $fileUploader): Response
     {
+        
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $file = $form->get('photo')->getData();
+            $fileName = $fileUploader->upload($file);
+            $user->setPhoto($fileName);
+
+            $newPsw = $request->request->get('newPsw');
+            $newPswConfirm = $request->request->get('newPswConfirm');
+
+            if (!empty($newPsw) && !empty($newPswConfirm)) {
+                $pswHash = password_hash($newPsw, PASSWORD_DEFAULT);
+                $user->setPassword($pswHash);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_index', [

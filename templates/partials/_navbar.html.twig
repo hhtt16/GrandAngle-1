@@ -3,7 +3,7 @@
     <ul>
         <li><a href="{{ path("home") }}">Accueil</a></li>
         <li><a href="#"><i class="far fa-calendar-alt"></i>&nbsp;Calendrier</a></li>
-        <li><a href="{{ path("user_show", {id: app.user.id}) }}"><img src="{{ asset("assets/medias/avatars/" ~ app.user.photo) }}" alt="avatar">&nbsp;{{ app.user.lastname }}&nbsp;{{ app.user.firstname }}</a></li>
+        <li><a href="{{ path("user_show", {id: app.user.id}) }}"><img src="{{ asset("uploads/avatars/" ~ app.user.photo) }}" alt="avatar">&nbsp;{{ app.user.lastname }}&nbsp;{{ app.user.firstname }}</a></li>
         <li><a href="{{ path("app_logout") }}"><i class="fas fa-sign-out-alt"></i>&nbsp;Déconnexion</a></li>
     </ul>
 </nav>

@@ -2,7 +2,7 @@
 <div class="row">
     <div class="row col-md-6">
         <div class="row align-items-center">
-            <img src="{{ asset("assets/medias/avatars/" ~ user.photo) }}" alt="avatar">
+            <img src="{{ asset("uploads/avatars/" ~ user.photo) }}" alt="avatar">
                 {{ form_widget(form.photo) }}
             </div>
             <div class="col-md-6">
@@ -17,9 +17,6 @@
                 </p>
                 <p>
                     {{ form_label(form.phone) }}
-                </p>
-                <p>
-                    {{ form_label(form.password) }}
                 </p>
                 <p>
                     {{ form_label(form.birth_date) }}
@@ -73,6 +70,12 @@
                 <p>
                     {{ form_label(form.city) }}
                 </p>
+                <p>
+                    <label for="newPsw">Nouveau mot de passe</label>
+                </p>
+                <p>
+                    <label for="newPswConfirm">Confirmer nouveau mot de passe</label>
+                </p>
             </div>
             <div class="col-md-6">
             {% if is_granted("ROLE_ADMIN") %}
@@ -100,9 +103,6 @@
                 
             {% endif %}
                 <p>
-                    {{ user.hire_date }}
-                </p>
-                <p>
                     {{ form_widget(form.address) }}
                 </p>
                 <p>
@@ -110,6 +110,12 @@
                 </p>
                 <p>
                     {{ form_widget(form.city) }}
+                </p>
+                <p>
+                    <input type="password" name="newPsw" id="newPsw">
+                </p>
+                <p>
+                    <input type="password" name="newPswConfirm" id="newPswConfirm">
                 </p>
             </div>
         </div>

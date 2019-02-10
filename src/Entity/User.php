@@ -47,7 +47,7 @@ class User implements UserInterface
     private $firstname;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      * @Assert\File
      */
     private $photo = 'default.png';

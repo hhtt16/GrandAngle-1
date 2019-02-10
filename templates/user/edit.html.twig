@@ -10,8 +10,8 @@
 
     {{ include('user/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a class="btn btn-secondary" href="{{ path('user_index') }}">back to list</a>
-
-    
+    {% if is_granted('ROLE_ADMIN') %}
+        <a class="btn btn-secondary" href="{{ path('user_index') }}">Retour</a>
+    {% endif %}
 </div>
 {% endblock %}
