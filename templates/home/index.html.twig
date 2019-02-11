@@ -25,7 +25,7 @@
             </div>
             {% if is_granted('ROLE_ADMIN') %}
                 <div class="col-6 col-md-3">
-                    <a href="#" class="home_category">
+                    <a href="{{ path("admin_index") }}" class="home_category">
                         <h2>Administration</h2>
                         <img alt="Administration" class="img-fluid" src="assets/medias/home/admin.jpg">
                     </a>

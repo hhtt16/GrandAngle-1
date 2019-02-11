@@ -14,28 +14,41 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class UserType extends AbstractType
+class AdminType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('photo', FileType::class,[
-                'data_class' => null,
-                'required' => false
-                ])
             ->add('email', EmailType::class)
-            ->add('password', HiddenType::class
-            )
+            ->add('roles', ChoiceType::class, [
+                'multiple' => true,
+                'expanded' => true,
+                'choices' => [
+                    'Administrateur' => 'ROLE_ADMIN',
+                    'Collaborateur' => 'ROLE_USER'
+                ]
+            ])
+            ->add('password', PasswordType::class)
             ->add('lastname', TextType::class)
             ->add('firstname', TextType::class)
+            ->add('photo', FileType::class, [
+                'data_class' => null,
+                'required' => false
+            ])
             ->add('address', TextType::class)
             ->add('postal_code', TextType::class)
             ->add('city', TextType::class)
+            ->add('birth_date', BirthdayType::class, [
+                'format' => 'dd-MM-yyyy'
+            ])
             ->add('phone', TextType::class, [
                 'required' => false
             ])
+            ->add('hire_date', DateType::class, [
+                'format' => 'dd-MM-yyyy'
+            ])
+            ->add('created_at')
         ;
     }
 

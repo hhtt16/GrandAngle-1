@@ -8,8 +8,8 @@
 
 <div class="container mt-5">
 
-    {{ include('user/_form.html.twig', {'button_label': 'Modifier'}) }}
+    {{ include('admin/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a class="btn btn-secondary" href="{{ path('home') }}">Retour</a>
+        <a class="btn btn-secondary" href="{{ path('admin_index') }}">Retour</a>
 </div>
 {% endblock %}
