@@ -55,16 +55,14 @@ class UserController extends AbstractController
             if ($file = $form->get('photo')->getData()) {
                 $fileName = $fileUploader->upload($file, $user->getPhoto());
                 $user->setPhoto($fileName);
+                $this->addFlash('success', 'Avatar bien modifié.');
             }
-            
-            $newPsw = $request->request->get('newPsw');
-            $newPswConfirm = $request->request->get('newPswConfirm');
+            // if password is set, hash it
+            $psw = $form->get('password')->getData();
 
-            //if new password is given, update
-
-            if (!empty($newPsw) && !empty($newPswConfirm)) {
-                $pswHash = password_hash($newPsw, PASSWORD_DEFAULT);
-                $user->setPassword($pswHash);
+            if (!empty($psw)) {
+                $user->setPassword(password_hash($psw, PASSWORD_DEFAULT));
+                $this->addFlash('success', 'Mot de passe bien modifié.');
             }
 
             $this->getDoctrine()->getManager()->flush();

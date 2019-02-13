@@ -11,7 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -27,7 +26,13 @@ class UserType extends AbstractType
                 'mapped' => false
                 ])
             ->add('email', EmailType::class)
-            ->add('password', HiddenType::class
+            ->add('password', PasswordType::class, [
+                'required' => false,
+                'mapped' => false,
+                'attr' => [
+                    'placeholder' => 'Entrez pour changer'
+                ]
+            ]
             )
             ->add('lastname', TextType::class)
             ->add('firstname', TextType::class)

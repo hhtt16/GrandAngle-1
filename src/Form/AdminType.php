@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class AdminType extends AbstractType
@@ -29,7 +30,6 @@ class AdminType extends AbstractType
                     'Collaborateur' => 'ROLE_USER'
                 ]
             ])
-            ->add('password', PasswordType::class)
             ->add('lastname', TextType::class)
             ->add('firstname', TextType::class)
             ->add('photo', FileType::class, [
@@ -40,16 +40,15 @@ class AdminType extends AbstractType
             ->add('address', TextType::class)
             ->add('postal_code', TextType::class)
             ->add('city', TextType::class)
-            ->add('birth_date', BirthdayType::class, [
-                'format' => 'dd-MM-yyyy'
-            ])
             ->add('phone', TextType::class, [
                 'required' => false
             ])
             ->add('hire_date', DateType::class, [
                 'format' => 'dd-MM-yyyy'
             ])
-            ->add('created_at')
+            ->add('created_at', DateTimeType::class, [
+                'format' => 'dd-MM-yyyy'
+            ])
         ;
     }
 
