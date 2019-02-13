@@ -23,7 +23,8 @@ class UserType extends AbstractType
         $builder
             ->add('photo', FileType::class,[
                 'data_class' => null,
-                'required' => false
+                'required' => false,
+                'mapped' => false
                 ])
             ->add('email', EmailType::class)
             ->add('password', HiddenType::class

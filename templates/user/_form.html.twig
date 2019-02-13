@@ -3,7 +3,7 @@
     <div class="row mt-5 col-md-6">
         <div class="row align-items-center">
             <img class="img-fluid" src="{{ asset("uploads/avatars/" ~ user.photo) }}" alt="avatar">
-                {{ form_widget(form.photo, {'attr': {'value': user.photo}}) }}
+                {{ form_widget(form.photo)}}
         </div>
         <div class="mt-5">
             <div class="form-group">

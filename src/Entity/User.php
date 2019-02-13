@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -22,6 +23,8 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(
+     *      message = "L'email '{{ value }}' n'est pas un email valide.")
      */
     private $email;
 
@@ -38,17 +41,24 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50
+     * )
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50
+     * )
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="text")
-     * @Assert\File
+     * @ORM\Column(type="string", nullable=true)
      */
     private $photo = 'default.png';
 

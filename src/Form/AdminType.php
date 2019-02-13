@@ -34,7 +34,8 @@ class AdminType extends AbstractType
             ->add('firstname', TextType::class)
             ->add('photo', FileType::class, [
                 'data_class' => null,
-                'required' => false
+                'required' => false,
+                'mapped' => false
             ])
             ->add('address', TextType::class)
             ->add('postal_code', TextType::class)

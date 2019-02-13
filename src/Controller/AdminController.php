@@ -37,6 +37,16 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $newPsw = $request->request->get('newPsw');
+            $newPswConfirm = $request->request->get('newPswConfirm');
+
+            //if new password is given, update
+
+            if (!empty($newPsw) && !empty($newPswConfirm)) {
+                $pswHash = password_hash($newPsw, PASSWORD_DEFAULT);
+                $user->setPassword($pswHash);
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -62,13 +72,11 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $file = $form->get('photo')->getData();
-
-            if ($file != null) {
-                $fileName = $fileUploader->upload($file);
+            
+            if ($file = $form->get('photo')->getData()) {
+                $fileName = $fileUploader->upload($file, $user->getPhoto());
                 $user->setPhoto($fileName);
-            } 
+            }
             
             $newPsw = $request->request->get('newPsw');
             $newPswConfirm = $request->request->get('newPswConfirm');
@@ -101,8 +109,10 @@ class AdminController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Collaborateur supprimé !');
         }
 
-        return $this->redirectToRoute('user_index');
+        return $this->redirectToRoute('admin_index');
     }
 }

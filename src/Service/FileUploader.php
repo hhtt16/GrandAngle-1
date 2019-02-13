@@ -2,8 +2,9 @@
 
 namespace App\Service;
 
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class FileUploader
 {
@@ -14,8 +15,12 @@ class FileUploader
         $this->targetDirectory = $targetDirectory;
     }
 
-    public function upload(UploadedFile $file)
+    public function upload(UploadedFile $file, string $fileToDelete)
     {
+        if ($fileToDelete) {
+            unlink('uploads/avatars/' . $fileToDelete);
+        }
+
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
         try {
